@@ -1,4 +1,6 @@
 {
   "serverPort": 5000,
-  "dbUrl": "mongodb+srv://Lev:l7wJ3XN0mWQyAOyF@cluster0.kw9c3lk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "dbUrl": "mongodb+srv://Lev:l7wJ3XN0mWQyAOyF@cluster0.kw9c3lk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "emailUrl": "https://api.emailjs.com/api/v1.0/email/send",
+  "weatherUrl": "http://api.weatherapi.com/v1/current.json?key=4cc5f57c89504b6ba5e161012241504&q="
 }
