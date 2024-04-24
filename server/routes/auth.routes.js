@@ -1,27 +1,9 @@
 const Router = require("express")
 const User = require("../models/User")
 const {check, validationResult} = require("express-validator")
-const axios = require("axios");
-const cities = require("../cities");
 const sendEmail = require("../emailSend");
 const router = new Router
-const config = require("config")
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
-async function getWeather(city) {
-    const weather = await axios.get(config.get("weatherUrl") + city)
-    return Math.abs(Math.floor(weather.data.current.temp_c))
-}
-
-function createOtp(firstCity, secondCity, thirdCity) {
-    if (firstCity < 10) firstCity = "0" + firstCity
-    if (secondCity < 10) secondCity = "0" + secondCity
-    if (thirdCity < 10) thirdCity = "0" + thirdCity
-    return firstCity + secondCity + thirdCity
-}
+const createOtp = require("../createOtp")
 
 router.post('/authorisation',
     [
@@ -34,12 +16,8 @@ router.post('/authorisation',
                 return res.status(400).json({message: "Incorrect request", errors})
             }
 
-            const firstCity = await getWeather(cities[getRandomInt(cities.length)])
-            const secondCity = await getWeather(cities[getRandomInt(cities.length)])
-            const thirdCity = await getWeather(cities[getRandomInt(cities.length)])
-
             const email = req.body.email
-            const otp = req.body.otp === undefined ? createOtp(firstCity.toString(), secondCity.toString(), thirdCity.toString()) : req.body.otp
+            const otp = await createOtp(req)
 
             await sendEmail(otp, email)
 
