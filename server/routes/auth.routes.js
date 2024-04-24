@@ -4,6 +4,7 @@ const {check, validationResult} = require("express-validator")
 const sendEmail = require("../emailSend");
 const router = new Router
 const createOtp = require("../createOtp")
+const createUser = require("../createUser")
 
 router.post('/authorisation',
     [
@@ -20,16 +21,10 @@ router.post('/authorisation',
             const otp = await createOtp(req)
 
             await sendEmail(otp, email)
+            await createUser(email, otp)
 
-            const user = new User({email, otp})
-            await user.save()
             return res.json({
-                message: `OTP for email ${email} was created`,
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    otp: user.otp
-                }
+                message: `OTP for email ${email} was created`
             })
         } catch (e) {
             console.log(e)
@@ -43,8 +38,7 @@ router.post('/login',
             const {email, otp} = req.body
             const user = await User.findOne({email})
 
-            const isOtpValid = otp === user.otp
-            if (!isOtpValid) {
+            if (otp !== user.otp) {
                 return res.status(400).json({message: "Incorrect OTP"})
             }
             return res.json({
