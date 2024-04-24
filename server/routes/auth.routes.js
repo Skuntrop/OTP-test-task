@@ -3,7 +3,7 @@ const User = require("../models/User")
 const {check, validationResult} = require("express-validator")
 const axios = require("axios");
 const cities = require("../cities");
-const SendEmail = require("../emailSend");
+const sendEmail = require("../emailSend");
 const router = new Router
 const config = require("config")
 
@@ -41,7 +41,7 @@ router.post('/authorisation',
             const email = req.body.email
             const otp = req.body.otp === undefined ? createOtp(firstCity.toString(), secondCity.toString(), thirdCity.toString()) : req.body.otp
 
-            await SendEmail(otp, email)
+            await sendEmail(otp, email)
 
             const user = new User({email, otp})
             await user.save()

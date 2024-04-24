@@ -1,7 +1,7 @@
 const axios = require("axios");
 const config = require("config")
 
-async function SendEmail(message, email) {
+async function sendEmail(message, email) {
     const serviceId = "service_bohhjip"
     const templateId = "template_stixwlh"
     const userId = "Z_x_xNC0oXWxBQJGJ"
@@ -26,4 +26,4 @@ async function SendEmail(message, email) {
     }
 }
 
-module.exports = SendEmail
+module.exports = sendEmail
