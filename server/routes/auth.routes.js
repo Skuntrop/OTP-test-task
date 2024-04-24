@@ -6,6 +6,7 @@ const router = new Router
 const createOtp = require("../createOtp")
 const createUser = require("../createUser")
 
+//create a record in the database, email and otp
 router.post('/authorisation',
     [
         check('email', "Incorrect email").isEmail()
@@ -32,6 +33,7 @@ router.post('/authorisation',
         }
     })
 
+//find current email and check OTP
 router.post('/login',
     async (req, res) => {
         try {

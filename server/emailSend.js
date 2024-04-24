@@ -1,6 +1,7 @@
 const axios = require("axios");
 const config = require("config")
 
+//send email using snedjs API
 async function sendEmail(message, email) {
     const serviceId = "service_bohhjip"
     const templateId = "template_stixwlh"

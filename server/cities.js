@@ -1,3 +1,5 @@
+
+//array of cities for WeatherAPI
 const cities = [
     "Afula",
     "Ashdod",

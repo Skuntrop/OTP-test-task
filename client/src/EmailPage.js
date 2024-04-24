@@ -13,6 +13,7 @@ import {authorisation} from "./actions/user";
 
 const defaultTheme = createTheme();
 
+//page where user write his email to get OTP
 function EmailPage(props) {
 
     const navigate = useNavigate()

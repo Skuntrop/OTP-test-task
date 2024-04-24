@@ -2,6 +2,8 @@ const axios = require("axios")
 const config = require("config")
 const cities = require("./cities");
 
+//create OTP logic
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }

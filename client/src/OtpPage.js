@@ -13,6 +13,7 @@ import {login} from "./actions/user";
 
 const defaultTheme = createTheme();
 
+//page, when user already got his OTP on email
 function OtpPage(props) {
 
     const [otp, setOtp] = useState()

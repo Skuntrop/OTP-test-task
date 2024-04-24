@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+//create a record in DB
 export const authorisation = async (email) => {
     try {
         await axios.post(`http://localhost:5000/api/auth/authorisation`, {
@@ -10,6 +11,7 @@ export const authorisation = async (email) => {
     }
 }
 
+//find email in DB and check OTP
 export const login = async (email, otp) => {
 
     try {
